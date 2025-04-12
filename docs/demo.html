@@ -1,12 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>北京故地重游 - 三日精彩行程</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+    />
     <style>
       :root {
         --primary-color: #ff6b95; /* 粉红色主色调 */
@@ -16,13 +25,14 @@
         --light-blue: #f0f8ff; /* 浅蓝背景 */
         --text-color: #343a40; /* 深灰色文字 */
         --title-color: #ff5a89; /* 深粉色标题 */
-        --spot-colors: #ff69b4, #ff1493, #ff8fbf, #ff69b4, #ff1493, #ff8fbf, #ff69b4, #ff1493, #ff8fbf, #ff69b4;
+        --spot-colors: #ff69b4, #ff1493, #ff8fbf, #ff69b4, #ff1493, #ff8fbf,
+          #ff69b4, #ff1493, #ff8fbf, #ff69b4;
         --header-height: 150px; /* 桌面版头部高度 */
         --header-height-mobile: 100px; /* 移动版头部高度 */
       }
 
       body {
-        font-family: 'Nunito', sans-serif;
+        font-family: "Nunito", sans-serif;
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--light-bg);
@@ -49,14 +59,14 @@
       }
 
       .header::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('https://img.freepik.com/free-vector/chinese-architecture-landscape-background_52683-44044.jpg') center/cover
-          no-repeat;
+        background: url("https://img.freepik.com/free-vector/chinese-architecture-landscape-background_52683-44044.jpg")
+          center/cover no-repeat;
         opacity: 0.1;
         z-index: 0;
       }
@@ -116,15 +126,17 @@
         right: 20px;
         width: 340px;
         max-height: 700px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.9) 100%);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.95) 0%,
+          rgba(240, 248, 255, 0.9) 100%
+        );
         border-radius: 12px;
         box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
         z-index: 100;
         overflow: hidden;
         backdrop-filter: blur(10px);
-        transition:
-          transform 0.3s ease,
-          opacity 0.3s ease;
+        transition: transform 0.3s ease, opacity 0.3s ease;
       }
 
       /* 收起状态 */
@@ -167,7 +179,11 @@
       }
 
       .itinerary-header {
-        background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        background: linear-gradient(
+          90deg,
+          var(--primary-color) 0%,
+          var(--secondary-color) 100%
+        );
         color: white;
         padding: 15px 20px;
         font-weight: 700;
@@ -186,7 +202,11 @@
       }
 
       .weather-panel {
-        background: linear-gradient(to right, rgba(77, 171, 247, 0.15), rgba(81, 207, 102, 0.1));
+        background: linear-gradient(
+          to right,
+          rgba(77, 171, 247, 0.15),
+          rgba(81, 207, 102, 0.1)
+        );
         border-radius: 8px;
         margin-bottom: 1rem;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -216,7 +236,11 @@
       }
 
       .day-title {
-        background: linear-gradient(90deg, var(--secondary-color) 0%, #a57aff 100%);
+        background: linear-gradient(
+          90deg,
+          var(--secondary-color) 0%,
+          #a57aff 100%
+        );
         color: white;
         padding: 15px;
         border-radius: 8px 8px 0 0;
@@ -235,13 +259,21 @@
 
       .spot:hover,
       .spot.active {
-        background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-blue) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--light-bg) 0%,
+          var(--light-blue) 100%
+        );
         border-left: 4px solid var(--primary-color);
       }
 
       /* 改进选中效果 */
       .spot.active {
-        background: linear-gradient(135deg, rgba(255, 107, 149, 0.15) 0%, rgba(112, 166, 255, 0.25) 100%);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 149, 0.15) 0%,
+          rgba(112, 166, 255, 0.25) 100%
+        );
         border-left: 4px solid var(--primary-color);
         transform: translateX(4px);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -250,13 +282,17 @@
 
       /* 选中标记 */
       .spot.active::before {
-        content: '';
+        content: "";
         position: absolute;
         left: -4px;
         top: 0;
         height: 100%;
         width: 4px;
-        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        background: linear-gradient(
+          to bottom,
+          var(--primary-color),
+          var(--secondary-color)
+        );
       }
 
       .spot-header {
@@ -549,7 +585,11 @@
 
       .progress-bar {
         height: 100%;
-        background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        background: linear-gradient(
+          90deg,
+          var(--primary-color) 0%,
+          var(--secondary-color) 100%
+        );
         width: 0%;
         transition: width 0.3s ease;
       }
@@ -572,7 +612,7 @@
     <div class="header text-center">
       <div class="container header-content">
         <h1 class="title-chinese">北京故地重游</h1>
-        <p class="subtitle">三天精彩行程 | 2024年5月30日 - 6月1日</p>
+        <p class="subtitle">精彩行程 | 2025-05-30 - 2025-06-01</p>
       </div>
     </div>
 
@@ -736,112 +776,115 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=3cdb60742465c1e86b6133e6a2a26ff5"></script>
+    <script
+      type="text/javascript"
+      src="https://webapi.amap.com/maps?v=2.0&key=3cdb60742465c1e86b6133e6a2a26ff5"
+    ></script>
     <script>
       // 景点配置数据
       const SPOTS_CONFIG = [
         // 第一天
         {
-          id: 'spot1',
+          id: "spot1",
           location: [116.398019, 39.87272], // 精确核对的永定门城楼坐标
-          time: '09:00',
-          name: '永定门城楼',
-          description: '明清时期重要城门，现为北京古代建筑博物馆',
-          fee: '20元/人',
-          duration: '1.5小时',
+          time: "09:00",
+          name: "永定门城楼",
+          description: "明清时期重要城门，现为北京古代建筑博物馆",
+          fee: "20元/人",
+          duration: "1.5小时",
           day: 1,
-          icon: '🏯' // 添加景点图标
+          icon: "🏯", // 添加景点图标
         },
         {
-          id: 'spot2',
+          id: "spot2",
           location: [116.380696, 39.874088], // 用户提供的陶然亭公园精确坐标
-          time: '11:00',
-          name: '陶然亭公园',
-          description: '清代名园，以亭得名，湖光山色，环境优美',
-          fee: '10元/人',
-          duration: '1.5小时',
+          time: "11:00",
+          name: "陶然亭公园",
+          description: "清代名园，以亭得名，湖光山色，环境优美",
+          fee: "10元/人",
+          duration: "1.5小时",
           day: 1,
-          icon: '🏞️' // 添加景点图标
+          icon: "🏞️", // 添加景点图标
         },
         {
-          id: 'spot3',
+          id: "spot3",
           location: [116.407526, 39.882218], // 天坛公园坐标
-          time: '14:00',
-          name: '天坛公园',
-          description: '世界文化遗产，明清两代帝王祭天场所',
-          fee: '35元/人',
-          duration: '3小时',
+          time: "14:00",
+          name: "天坛公园",
+          description: "世界文化遗产，明清两代帝王祭天场所",
+          fee: "35元/人",
+          duration: "3小时",
           day: 1,
-          icon: '⛩️' // 添加景点图标
+          icon: "⛩️", // 添加景点图标
         },
         // 第二天
         {
-          id: 'spot4',
+          id: "spot4",
           location: [116.401148, 39.896135], // 用户提供的前门大街精确坐标
-          time: '09:00',
-          name: '前门大街',
-          description: '老北京商业街，传统建筑群',
-          fee: '免费',
-          duration: '2小时',
+          time: "09:00",
+          name: "前门大街",
+          description: "老北京商业街，传统建筑群",
+          fee: "免费",
+          duration: "2小时",
           day: 2,
-          icon: '🏮' // 添加景点图标
+          icon: "🏮", // 添加景点图标
         },
         {
-          id: 'spot5',
+          id: "spot5",
           location: [116.392465, 39.905219], // 用户提供的人民大会堂精确坐标
-          time: '12:00',
-          name: '人民大会堂',
-          description: '中国最高国家权力机关办公地，政治中心',
-          fee: '30元/人',
-          duration: '2小时',
+          time: "12:00",
+          name: "人民大会堂",
+          description: "中国最高国家权力机关办公地，政治中心",
+          fee: "30元/人",
+          duration: "2小时",
           day: 2,
-          icon: '🏛️' // 添加景点图标
+          icon: "🏛️", // 添加景点图标
         },
         {
-          id: 'spot6',
+          id: "spot6",
           location: [116.397452, 39.906073], // 天安门广场坐标
-          time: '15:00',
-          name: '天安门广场',
-          description: '世界最大城市中心广场',
-          fee: '免费',
-          duration: '2小时',
+          time: "15:00",
+          name: "天安门广场",
+          description: "世界最大城市中心广场",
+          fee: "免费",
+          duration: "2小时",
           day: 2,
-          icon: '🏛️' // 添加景点图标
+          icon: "🏛️", // 添加景点图标
         },
         // 第三天
         {
-          id: 'spot7',
+          id: "spot7",
           location: [116.397026, 39.918058], // 故宫博物院坐标
-          time: '09:00',
-          name: '故宫博物院',
-          description: '世界最大的宫殿建筑群，中国明清两代的皇家宫殿',
-          fee: '60元/人',
-          duration: '4小时',
+          time: "09:00",
+          name: "故宫博物院",
+          description: "世界最大的宫殿建筑群，中国明清两代的皇家宫殿",
+          fee: "60元/人",
+          duration: "4小时",
           day: 3,
-          icon: '🏯' // 添加景点图标
+          icon: "🏯", // 添加景点图标
         },
         {
-          id: 'spot8',
+          id: "spot8",
           location: [116.386795, 39.926984], // 精确核对的北海公园坐标
-          time: '14:00',
-          name: '北海公园',
-          description: '皇家园林，千年历史文化遗址',
-          fee: '20元/人',
-          duration: '2小时',
+          time: "14:00",
+          name: "北海公园",
+          description: "皇家园林，千年历史文化遗址",
+          fee: "20元/人",
+          duration: "2小时",
           day: 3,
-          icon: '🏞️' // 添加景点图标
+          icon: "🏞️", // 添加景点图标
         },
         {
-          id: 'spot9',
+          id: "spot9",
           location: [116.403366, 39.936812], // 南锣鼓巷坐标
-          time: '17:00',
-          name: '南锣鼓巷',
-          description: '老北京胡同文化，传统小吃与特色商铺',
-          fee: '免费',
-          duration: '2小时',
+          time: "17:00",
+          name: "南锣鼓巷",
+          description: "老北京胡同文化，传统小吃与特色商铺",
+          fee: "免费",
+          duration: "2小时",
           day: 3,
-          icon: '🏮' // 添加景点图标
-        }
+          icon: "🏮", // 添加景点图标
+        },
       ];
 
       // 全局变量
@@ -858,16 +901,16 @@
 
       // 初始化地图
       function initMap() {
-        map = new AMap.Map('map', {
+        map = new AMap.Map("map", {
           zoom: 11,
           center: [116.4, 39.9],
-          viewMode: '2D', // 使用2D模式
-          mapStyle: 'amap://styles/fresh',
-          animateEnable: true
+          viewMode: "2D", // 使用2D模式
+          mapStyle: "amap://styles/fresh",
+          animateEnable: true,
         });
 
         // 添加地图控件
-        map.plugin(['AMap.Scale'], function () {
+        map.plugin(["AMap.Scale"], function () {
           map.addControl(new AMap.Scale());
         });
 
@@ -884,7 +927,7 @@
         checkMobileDevice();
 
         // 窗口大小变化时重新检测
-        window.addEventListener('resize', checkMobileDevice);
+        window.addEventListener("resize", checkMobileDevice);
       }
 
       // 从配置数据初始化景点
@@ -893,7 +936,7 @@
         spots = [];
 
         // 获取所有景点DOM元素
-        const spotElements = document.querySelectorAll('.spot');
+        const spotElements = document.querySelectorAll(".spot");
 
         // 从配置数据创建景点对象
         SPOTS_CONFIG.forEach((config, index) => {
@@ -907,13 +950,13 @@
             duration: config.duration,
             element: spotElements[index],
             day: config.day,
-            icon: config.icon || '📍' // 使用配置的图标或默认图标
+            icon: config.icon || "📍", // 使用配置的图标或默认图标
           };
           spots.push(spotData);
 
           // 同时更新DOM元素的数据属性
           if (spotElements[index]) {
-            spotElements[index].dataset.location = config.location.join(',');
+            spotElements[index].dataset.location = config.location.join(",");
             spotElements[index].dataset.time = config.time;
             spotElements[index].dataset.name = config.name;
             spotElements[index].dataset.description = config.description;
@@ -921,17 +964,23 @@
             spotElements[index].dataset.duration = config.duration;
 
             // 更新DOM元素内部的显示内容
-            const timeElement = spotElements[index].querySelector('.spot-time');
-            const nameElement = spotElements[index].querySelector('.spot-name');
-            const descElement = spotElements[index].querySelector('.spot-desc');
-            const durationElement = spotElements[index].querySelector('.spot-meta-item:first-child');
-            const feeElement = spotElements[index].querySelector('.spot-meta-item:last-child');
+            const timeElement = spotElements[index].querySelector(".spot-time");
+            const nameElement = spotElements[index].querySelector(".spot-name");
+            const descElement = spotElements[index].querySelector(".spot-desc");
+            const durationElement = spotElements[index].querySelector(
+              ".spot-meta-item:first-child"
+            );
+            const feeElement = spotElements[index].querySelector(
+              ".spot-meta-item:last-child"
+            );
 
             if (timeElement) timeElement.textContent = config.time;
             if (nameElement) nameElement.textContent = config.name;
             if (descElement) descElement.textContent = config.description;
-            if (durationElement) durationElement.innerHTML = `<i class="bx bx-time"></i> ${config.duration}`;
-            if (feeElement) feeElement.innerHTML = `<i class="bx bx-money"></i> ${config.fee}`;
+            if (durationElement)
+              durationElement.innerHTML = `<i class="bx bx-time"></i> ${config.duration}`;
+            if (feeElement)
+              feeElement.innerHTML = `<i class="bx bx-money"></i> ${config.fee}`;
           }
         });
       }
@@ -939,7 +988,7 @@
       // 创建所有标记点和路线
       function createMarkersAndRoute() {
         // 清空现有标记
-        markers.forEach(marker => marker.setMap(null));
+        markers.forEach((marker) => marker.setMap(null));
         markers = [];
 
         if (polyline) {
@@ -950,12 +999,12 @@
         // 创建标记点
         spots.forEach((spot, index) => {
           // 为每个节点创建自定义标记内容
-          const markerContent = document.createElement('div');
+          const markerContent = document.createElement("div");
           markerContent.className = `custom-marker spot-${index}`;
           markerContent.innerHTML = `
             <div>
               <span class="marker-number">${index + 1}</span>
-              <span>${spot.icon || ''} ${spot.name}</span>
+              <span>${spot.icon || ""} ${spot.name}</span>
             </div>
           `;
 
@@ -964,11 +1013,11 @@
             map: map,
             content: markerContent,
             offset: new AMap.Pixel(-10, -20),
-            zIndex: 100
+            zIndex: 100,
           });
 
           // 点击标记时高亮显示
-          marker.on('click', () => {
+          marker.on("click", () => {
             currentIndex = index;
             highlightSpot(index);
           });
@@ -977,15 +1026,15 @@
         });
 
         // 创建虚线路径（背景路线）
-        const path = spots.map(spot => spot.location);
+        const path = spots.map((spot) => spot.location);
         polyline = new AMap.Polyline({
           path: path,
-          strokeColor: '#cccccc',
+          strokeColor: "#cccccc",
           strokeWeight: 4,
           strokeOpacity: 0.6,
-          strokeStyle: 'dashed',
+          strokeStyle: "dashed",
           strokeDasharray: [5, 5],
-          zIndex: 50
+          zIndex: 50,
         });
         polyline.setMap(map);
 
@@ -996,7 +1045,7 @@
       // 添加中国风水墨画效果水印
       function addWatermark() {
         // 创建水印层
-        const watermark = document.createElement('div');
+        const watermark = document.createElement("div");
         watermark.style.cssText = `
           position: absolute;
           bottom: 30px;
@@ -1011,23 +1060,25 @@
             <path d="M40,100 Q70,60 100,100 T160,100" stroke="#000" stroke-width="8" fill="none" />
           </svg>
         `;
-        document.querySelector('.map-wrapper').appendChild(watermark);
+        document.querySelector(".map-wrapper").appendChild(watermark);
       }
 
       // 显示景点详情
       function showSpotDetail(index) {
         const spot = spots[index];
-        const detailEl = document.querySelector('.spot-detail');
+        const detailEl = document.querySelector(".spot-detail");
 
         // 更新详情内容
-        detailEl.querySelector('.detail-name').textContent = spot.name;
-        detailEl.querySelector('.detail-time').textContent = spot.time;
-        detailEl.querySelector('.detail-desc').textContent = spot.description;
-        detailEl.querySelector('.detail-duration').textContent = `建议游览：${spot.duration}`;
-        detailEl.querySelector('.detail-fee').textContent = `门票：${spot.fee}`;
+        detailEl.querySelector(".detail-name").textContent = spot.name;
+        detailEl.querySelector(".detail-time").textContent = spot.time;
+        detailEl.querySelector(".detail-desc").textContent = spot.description;
+        detailEl.querySelector(
+          ".detail-duration"
+        ).textContent = `建议游览：${spot.duration}`;
+        detailEl.querySelector(".detail-fee").textContent = `门票：${spot.fee}`;
 
         // 显示详情面板
-        detailEl.classList.add('active');
+        detailEl.classList.add("active");
 
         // 地图聚焦到该点
         map.setCenter(spot.location);
@@ -1038,7 +1089,7 @@
       function smoothSetMapView(viewPoints, padding = [60, 60, 60, 60]) {
         // 计算边界
         const bounds = new AMap.Bounds();
-        viewPoints.forEach(point => {
+        viewPoints.forEach((point) => {
           bounds.extend(point.getPosition());
         });
 
@@ -1049,7 +1100,10 @@
         map.panTo(targetCenter);
 
         // 如果需要调整缩放级别，使用平滑缩放
-        const targetZoom = Math.min(map.getFitZoomByBounds(bounds, padding), 14);
+        const targetZoom = Math.min(
+          map.getFitZoomByBounds(bounds, padding),
+          14
+        );
         if (map.getZoom() !== targetZoom) {
           map.setZoom(targetZoom);
         }
@@ -1063,7 +1117,10 @@
           const nextIndex = currentIndex + 1;
 
           // 获取当前点和下一个点的位置
-          const currentLoc = currentIndex > -1 ? spots[currentIndex].location : spots[0].location;
+          const currentLoc =
+            currentIndex > -1
+              ? spots[currentIndex].location
+              : spots[0].location;
           const nextLoc = spots[nextIndex].location;
 
           // 计算两点中心点
@@ -1071,19 +1128,19 @@
           const centerLng = (currentLoc[0] + nextLoc[0]) / 2;
 
           // 计算两点之间的距离（公里数）
-          const distance = Math.sqrt(Math.pow(currentLoc[0] - nextLoc[0], 2) + Math.pow(currentLoc[1] - nextLoc[1], 2)) * 111; // 大致转换为公里
+          const distance =
+            Math.sqrt(
+              Math.pow(currentLoc[0] - nextLoc[0], 2) +
+                Math.pow(currentLoc[1] - nextLoc[1], 2)
+            ) * 111; // 大致转换为公里
 
           // 根据距离调整缩放级别，距离越大缩放级别越小
           let zoom = 14; // 默认缩放级别
 
-          if (distance < 0.5)
-            zoom = 15; // 500米以内
-          else if (distance < 2)
-            zoom = 14; // 2公里以内
-          else if (distance < 5)
-            zoom = 13; // 5公里以内
-          else if (distance < 10)
-            zoom = 12; // 10公里以内
+          if (distance < 0.5) zoom = 15; // 500米以内
+          else if (distance < 2) zoom = 14; // 2公里以内
+          else if (distance < 5) zoom = 13; // 5公里以内
+          else if (distance < 10) zoom = 12; // 10公里以内
           else zoom = 11; // 更远距离
 
           // 平滑设置地图视野，确保两点都在视野内
@@ -1093,14 +1150,18 @@
           highlightSpot(nextIndex);
 
           // 绘制路线
-          drawAnimatedLine(currentIndex > -1 ? currentIndex : 0, nextIndex, () => {
-            currentIndex = nextIndex;
+          drawAnimatedLine(
+            currentIndex > -1 ? currentIndex : 0,
+            nextIndex,
+            () => {
+              currentIndex = nextIndex;
 
-            // 立即继续播放下一段
-            if (!animationPaused) {
-              playNextSegment();
+              // 立即继续播放下一段
+              if (!animationPaused) {
+                playNextSegment();
+              }
             }
-          });
+          );
         } else {
           pauseRouteAnimation();
           // 播放完毕，显示全景图
@@ -1126,10 +1187,10 @@
           strokeColor: pathColor,
           strokeWeight: 6,
           strokeOpacity: 0.8,
-          lineJoin: 'round',
-          lineCap: 'round',
+          lineJoin: "round",
+          lineCap: "round",
           zIndex: 90,
-          showDir: true
+          showDir: true,
         });
         polyline.setMap(map);
 
@@ -1174,16 +1235,16 @@
       // 获取颜色函数
       function getColorForIndex(index) {
         const colors = [
-          '#ff6b95', // 粉红
-          '#70a6ff', // 蓝色
-          '#ffa582', // 橙色
-          '#fd7e14', // 深橙
-          '#f06595', // 深粉
-          '#ff6b95', // 粉红
-          '#70a6ff', // 蓝色
-          '#ffa582', // 橙色
-          '#fd7e14', // 深橙
-          '#f06595' // 深粉
+          "#ff6b95", // 粉红
+          "#70a6ff", // 蓝色
+          "#ffa582", // 橙色
+          "#fd7e14", // 深橙
+          "#f06595", // 深粉
+          "#ff6b95", // 粉红
+          "#70a6ff", // 蓝色
+          "#ffa582", // 橙色
+          "#fd7e14", // 深橙
+          "#f06595", // 深粉
         ];
         return colors[index % colors.length];
       }
@@ -1193,11 +1254,14 @@
         // 高亮当前景点卡片
         spots.forEach((spot, i) => {
           if (i === index) {
-            spot.element.classList.add('active');
+            spot.element.classList.add("active");
             // 平滑滚动到选中的景点卡片
-            spot.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            spot.element.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           } else {
-            spot.element.classList.remove('active');
+            spot.element.classList.remove("active");
           }
         });
 
@@ -1205,12 +1269,12 @@
         markers.forEach((marker, i) => {
           const markerEl = marker.getContent();
           if (i === index) {
-            markerEl.classList.add('active');
+            markerEl.classList.add("active");
             // 为选中的标记添加脉冲动画效果
-            markerEl.style.animation = 'pulse 1.5s infinite';
+            markerEl.style.animation = "pulse 1.5s infinite";
           } else {
-            markerEl.classList.remove('active');
-            markerEl.style.animation = '';
+            markerEl.classList.remove("active");
+            markerEl.style.animation = "";
           }
         });
       }
@@ -1221,7 +1285,7 @@
         resetRouteAnimation(true);
 
         animationPaused = false;
-        const playBtn = document.getElementById('playBtn');
+        const playBtn = document.getElementById("playBtn");
         playBtn.innerHTML = '<i class="bx bx-pause"></i>';
         playBtn.onclick = pauseRouteAnimation;
 
@@ -1237,7 +1301,7 @@
         clearInterval(timer);
         clearInterval(drawTimer);
 
-        const playBtn = document.getElementById('playBtn');
+        const playBtn = document.getElementById("playBtn");
         playBtn.innerHTML = '<i class="bx bx-play"></i>';
         playBtn.onclick = playRouteAnimation;
       }
@@ -1247,7 +1311,7 @@
         pauseRouteAnimation();
 
         // 清除所有已完成的线段
-        completedSegments.forEach(segment => {
+        completedSegments.forEach((segment) => {
           if (segment) segment.setMap(null);
         });
         completedSegments = [];
@@ -1255,13 +1319,13 @@
         currentIndex = -1;
 
         // 重置所有标记和景点高亮
-        markers.forEach(marker => {
+        markers.forEach((marker) => {
           const markerEl = marker.getContent();
-          markerEl.classList.remove('active');
+          markerEl.classList.remove("active");
         });
 
-        spots.forEach(spot => {
-          spot.element.classList.remove('active');
+        spots.forEach((spot) => {
+          spot.element.classList.remove("active");
         });
 
         // 平滑移动到起点
@@ -1270,7 +1334,7 @@
         }
 
         if (!keepPaused) {
-          const playBtn = document.getElementById('playBtn');
+          const playBtn = document.getElementById("playBtn");
           playBtn.innerHTML = '<i class="bx bx-play"></i>';
           playBtn.onclick = playRouteAnimation;
         }
@@ -1285,15 +1349,17 @@
       // 绑定事件
       function bindEvents() {
         // 播放按钮 - 总是从头开始播放
-        const playBtn = document.getElementById('playBtn');
+        const playBtn = document.getElementById("playBtn");
         playBtn.onclick = playRouteAnimation;
 
         // 概览按钮 - 展示完整路线
-        document.getElementById('overviewBtn').addEventListener('click', showFullRouteMap);
+        document
+          .getElementById("overviewBtn")
+          .addEventListener("click", showFullRouteMap);
 
         // 点击景点卡片
         spots.forEach((spot, index) => {
-          spot.element.addEventListener('click', () => {
+          spot.element.addEventListener("click", () => {
             // 暂停当前动画
             pauseRouteAnimation();
 
@@ -1312,28 +1378,30 @@
         });
 
         // 面板切换按钮
-        document.getElementById('panelToggle').addEventListener('click', togglePanel);
+        document
+          .getElementById("panelToggle")
+          .addEventListener("click", togglePanel);
       }
 
       // 更新按钮状态函数
       function updateToggleButton(collapsed) {
-        const toggleBtn = document.getElementById('panelToggle');
+        const toggleBtn = document.getElementById("panelToggle");
         if (collapsed) {
           toggleBtn.innerHTML = '<i class="bx bx-list-ul"></i>';
-          toggleBtn.setAttribute('title', '查看行程详情');
+          toggleBtn.setAttribute("title", "查看行程详情");
         } else {
           toggleBtn.innerHTML = '<i class="bx bx-x"></i>';
-          toggleBtn.setAttribute('title', '关闭行程详情');
+          toggleBtn.setAttribute("title", "关闭行程详情");
         }
       }
 
       // 修改切换面板函数
       function togglePanel() {
-        const panel = document.querySelector('.itinerary-panel');
-        const isCollapsed = panel.classList.contains('collapsed');
+        const panel = document.querySelector(".itinerary-panel");
+        const isCollapsed = panel.classList.contains("collapsed");
 
         // 切换面板状态
-        panel.classList.toggle('collapsed');
+        panel.classList.toggle("collapsed");
 
         // 更新按钮状态
         updateToggleButton(!isCollapsed);
@@ -1342,24 +1410,27 @@
       // 检测是否为移动设备
       function checkMobileDevice() {
         // 检测是否为移动设备或小屏幕
-        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isMobileDevice =
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          );
         const isSmallScreen = window.innerWidth <= 992;
         const shouldHidePanel = isMobileDevice || isSmallScreen;
-        const panel = document.querySelector('.itinerary-panel');
+        const panel = document.querySelector(".itinerary-panel");
 
         // 根据设备类型调整页面元素
         if (shouldHidePanel) {
           // 在移动设备或小屏幕上默认收起面板
-          panel.classList.add('collapsed');
+          panel.classList.add("collapsed");
 
           // 更新按钮状态为展开
           updateToggleButton(true);
 
           // 设置面板的样式，确保移动设备上更好的用户体验
-          panel.style.maxHeight = '70vh';
+          panel.style.maxHeight = "70vh";
         } else {
           // 在桌面设备上默认展开面板
-          panel.classList.remove('collapsed');
+          panel.classList.remove("collapsed");
 
           // 更新按钮状态为关闭
           updateToggleButton(false);
@@ -1367,20 +1438,20 @@
 
         // 调整控制按钮的位置，确保在小屏幕上不被遮挡
         if (isSmallScreen) {
-          const controls = document.querySelector('.controls');
-          controls.style.bottom = '15px';
+          const controls = document.querySelector(".controls");
+          controls.style.bottom = "15px";
 
           // 同步调整面板切换按钮的位置
-          const panelToggle = document.getElementById('panelToggle');
-          panelToggle.style.bottom = '23px'; // 15px + 8px padding
+          const panelToggle = document.getElementById("panelToggle");
+          panelToggle.style.bottom = "23px"; // 15px + 8px padding
         } else {
           // 重置为默认位置
-          const controls = document.querySelector('.controls');
-          controls.style.bottom = '30px';
+          const controls = document.querySelector(".controls");
+          controls.style.bottom = "30px";
 
           // 同步调整面板切换按钮的位置
-          const panelToggle = document.getElementById('panelToggle');
-          panelToggle.style.bottom = '42px'; // 30px + 12px padding
+          const panelToggle = document.getElementById("panelToggle");
+          panelToggle.style.bottom = "42px"; // 30px + 12px padding
         }
       }
 
@@ -1392,10 +1463,11 @@
         checkMobileDevice();
 
         // 更新概览按钮的图标
-        document.getElementById('overviewBtn').innerHTML = '<i class="bx bx-map-alt"></i>';
+        document.getElementById("overviewBtn").innerHTML =
+          '<i class="bx bx-map-alt"></i>';
 
         // 添加窗口大小变化事件监听，动态调整界面
-        window.addEventListener('resize', function () {
+        window.addEventListener("resize", function () {
           // 延迟执行以避免频繁触发
           if (this.resizeTimer) clearTimeout(this.resizeTimer);
           this.resizeTimer = setTimeout(function () {
@@ -1404,7 +1476,7 @@
         });
 
         // 为移动设备添加屏幕方向变化检测
-        window.addEventListener('orientationchange', function () {
+        window.addEventListener("orientationchange", function () {
           setTimeout(checkMobileDevice, 300);
         });
       };
