@@ -7,8 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <style>
       :root {
         --primary-color: #ff6b95; /* 粉红色主色调 */
@@ -19,18 +17,12 @@
         --text-color: #343a40; /* 深灰色文字 */
         --title-color: #ff5a89; /* 深粉色标题 */
         --spot-colors: #ff69b4, #ff1493, #ff8fbf, #ff69b4, #ff1493, #ff8fbf, #ff69b4, #ff1493, #ff8fbf, #ff69b4;
+        --header-height: 150px; /* 桌面版头部高度 */
+        --header-height-mobile: 100px; /* 移动版头部高度 */
       }
 
       body {
-        font-family:
-          'Nunito',
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          Roboto,
-          'Helvetica Neue',
-          Arial,
-          sans-serif;
+        font-family: 'Nunito', sans-serif;
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--light-bg);
@@ -50,6 +42,10 @@
         overflow: hidden;
         margin-bottom: 0;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .header::before {
@@ -74,10 +70,11 @@
       .header-content {
         position: relative;
         z-index: 1;
+        font-family: cursive, sans-serif;
       }
 
       .title-chinese {
-        font-family: 'Nunito', 'ZCOOL XiaoWei', sans-serif;
+        font-family: cursive, sans-serif;
         font-weight: 800;
         font-size: 3.4rem;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
@@ -90,7 +87,7 @@
         font-size: 1.3rem;
         font-weight: 600;
         opacity: 0.95;
-        font-family: 'Nunito', 'ZCOOL XiaoWei', sans-serif;
+        font-family: cursive, sans-serif;
         color: white;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
       }
@@ -125,6 +122,48 @@
         z-index: 100;
         overflow: hidden;
         backdrop-filter: blur(10px);
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+      }
+
+      /* 收起状态 */
+      .itinerary-panel.collapsed {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      /* 面板切换按钮 */
+      .panel-toggle {
+        position: fixed;
+        right: 40px;
+        bottom: 42px; /* 30px(controls底部) + 12px(controls上padding) - 按钮垂直居中的偏移量 */
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 102;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .panel-toggle i {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+      }
+
+      .panel-toggle:hover {
+        background: linear-gradient(135deg, #4dabf7, #51cf66);
+        transform: scale(1.1);
+      }
+
+      .panel-toggle:hover i {
+        color: white;
       }
 
       .itinerary-header {
@@ -340,27 +379,81 @@
       }
 
       @media (max-width: 992px) {
+        :root {
+          --header-height: var(--header-height-mobile);
+        }
+
+        .title-chinese {
+          font-size: 2.2rem;
+        }
+
+        .subtitle {
+          font-size: 1rem;
+        }
+
         #map {
-          height: 500px;
+          height: calc(100vh - var(--header-height));
+          min-height: auto;
         }
 
         .itinerary-panel {
-          position: relative;
+          position: fixed;
           top: auto;
-          right: auto;
-          width: 100%;
-          max-height: none;
-          margin-top: 1rem;
-        }
-
-        .spot-detail {
-          left: 50%;
-          transform: translateX(-50%) translateY(20px);
+          bottom: 80px;
+          right: 0;
           width: 90%;
+          max-width: 340px;
+          max-height: 60vh;
+          margin-top: 0;
+          border-radius: 12px 0 0 12px;
         }
 
-        .spot-detail.active {
-          transform: translateX(-50%) translateY(0);
+        .itinerary-panel.collapsed {
+          transform: translateX(calc(100% - 40px));
+        }
+
+        .controls {
+          bottom: 20px;
+        }
+
+        /* 修改以确保在移动设备上与控制按钮同步调整 */
+        .panel-toggle {
+          bottom: 28px; /* 20px(controls底部) + 8px(小屏幕controls上padding) */
+        }
+      }
+
+      @media (max-width: 576px) {
+        .title-chinese {
+          font-size: 1.8rem;
+        }
+
+        .subtitle {
+          font-size: 0.8rem;
+        }
+
+        .header {
+          padding: 1rem 0;
+        }
+
+        .itinerary-panel {
+          width: 85%;
+          max-height: 50vh;
+        }
+
+        .controls {
+          padding: 8px 15px;
+        }
+
+        .control-btn {
+          width: 40px;
+          height: 40px;
+          margin: 0 5px;
+        }
+
+        /* 进一步确保在小屏幕设备上的同步调整 */
+        .panel-toggle {
+          width: 40px;
+          height: 40px;
         }
       }
 
@@ -629,6 +722,10 @@
         </button>
       </div>
 
+      <button class="panel-toggle" id="panelToggle" title="查看行程详情">
+        <i class="bx bx-list-ul"></i>
+      </button>
+
       <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
       </div>
@@ -782,6 +879,12 @@
 
         // 绑定事件
         bindEvents();
+
+        // 检测是否为移动设备
+        checkMobileDevice();
+
+        // 窗口大小变化时重新检测
+        window.addEventListener('resize', checkMobileDevice);
       }
 
       // 从配置数据初始化景点
@@ -1207,13 +1310,103 @@
             highlightSpot(index);
           });
         });
+
+        // 面板切换按钮
+        document.getElementById('panelToggle').addEventListener('click', togglePanel);
+      }
+
+      // 更新按钮状态函数
+      function updateToggleButton(collapsed) {
+        const toggleBtn = document.getElementById('panelToggle');
+        if (collapsed) {
+          toggleBtn.innerHTML = '<i class="bx bx-list-ul"></i>';
+          toggleBtn.setAttribute('title', '查看行程详情');
+        } else {
+          toggleBtn.innerHTML = '<i class="bx bx-x"></i>';
+          toggleBtn.setAttribute('title', '关闭行程详情');
+        }
+      }
+
+      // 修改切换面板函数
+      function togglePanel() {
+        const panel = document.querySelector('.itinerary-panel');
+        const isCollapsed = panel.classList.contains('collapsed');
+
+        // 切换面板状态
+        panel.classList.toggle('collapsed');
+
+        // 更新按钮状态
+        updateToggleButton(!isCollapsed);
+      }
+
+      // 检测是否为移动设备
+      function checkMobileDevice() {
+        // 检测是否为移动设备或小屏幕
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isSmallScreen = window.innerWidth <= 992;
+        const shouldHidePanel = isMobileDevice || isSmallScreen;
+        const panel = document.querySelector('.itinerary-panel');
+
+        // 根据设备类型调整页面元素
+        if (shouldHidePanel) {
+          // 在移动设备或小屏幕上默认收起面板
+          panel.classList.add('collapsed');
+
+          // 更新按钮状态为展开
+          updateToggleButton(true);
+
+          // 设置面板的样式，确保移动设备上更好的用户体验
+          panel.style.maxHeight = '70vh';
+        } else {
+          // 在桌面设备上默认展开面板
+          panel.classList.remove('collapsed');
+
+          // 更新按钮状态为关闭
+          updateToggleButton(false);
+        }
+
+        // 调整控制按钮的位置，确保在小屏幕上不被遮挡
+        if (isSmallScreen) {
+          const controls = document.querySelector('.controls');
+          controls.style.bottom = '15px';
+
+          // 同步调整面板切换按钮的位置
+          const panelToggle = document.getElementById('panelToggle');
+          panelToggle.style.bottom = '23px'; // 15px + 8px padding
+        } else {
+          // 重置为默认位置
+          const controls = document.querySelector('.controls');
+          controls.style.bottom = '30px';
+
+          // 同步调整面板切换按钮的位置
+          const panelToggle = document.getElementById('panelToggle');
+          panelToggle.style.bottom = '42px'; // 30px + 12px padding
+        }
       }
 
       // 页面加载完成后初始化
       window.onload = function () {
         initMap();
+
+        // 检测设备类型
+        checkMobileDevice();
+
         // 更新概览按钮的图标
         document.getElementById('overviewBtn').innerHTML = '<i class="bx bx-map-alt"></i>';
+
+        // 添加窗口大小变化事件监听，动态调整界面
+        window.addEventListener('resize', function () {
+          // 延迟执行以避免频繁触发
+          if (this.resizeTimer) clearTimeout(this.resizeTimer);
+          this.resizeTimer = setTimeout(function () {
+            checkMobileDevice();
+          }, 300);
+        });
+
+        // 为移动设备添加屏幕方向变化检测
+        window.addEventListener('orientationchange', function () {
+          setTimeout(checkMobileDevice, 300);
+        });
       };
     </script>
   </body>
