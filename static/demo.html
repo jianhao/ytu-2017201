@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>北京故地重游 - 三日精彩行程</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: #ff6b95; /* 粉红色主色调 */
+        --secondary-color: #70a6ff; /* 蓝色次要色调 */
+        --accent-color: #ffa582; /* 橙色强调色 */
+        --light-bg: #fff6f8; /* 浅粉背景 */
+        --light-blue: #f0f8ff; /* 浅蓝背景 */
+        --text-color: #343a40; /* 深灰色文字 */
+        --title-color: #ff5a89; /* 深粉色标题 */
+        --spot-colors: #ff69b4, #ff1493, #ff8fbf, #ff69b4, #ff1493, #ff8fbf, #ff69b4, #ff1493, #ff8fbf, #ff69b4;
+      }
+
+      body {
+        font-family:
+          'Nunito',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--light-bg);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, #ffd6e7 0%, #c1e3ff 100%);
+      }
+
+      .header {
+        background: linear-gradient(90deg, #ff8eb4 0%, #70a6ff 100%);
+        color: white;
+        padding: 2rem 0;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://img.freepik.com/free-vector/chinese-architecture-landscape-background_52683-44044.jpg') center/cover
+          no-repeat;
+        opacity: 0.1;
+        z-index: 0;
+      }
+
+      .header::after {
+        /* 移除或调整底部渐变，避免视觉空隙 */
+        content: none;
+        /* 或者调整为: background: linear-gradient(135deg, transparent 25px, var(--light-bg) 0); */
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .title-chinese {
+        font-family: 'Nunito', 'ZCOOL XiaoWei', sans-serif;
+        font-weight: 800;
+        font-size: 3.4rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        margin-bottom: 0.5rem;
+        letter-spacing: 1px;
+        color: white;
+      }
+
+      .subtitle {
+        font-size: 1.3rem;
+        font-weight: 600;
+        opacity: 0.95;
+        font-family: 'Nunito', 'ZCOOL XiaoWei', sans-serif;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .map-wrapper {
+        position: relative;
+        /* 设置背景色与body一致消除空隙 */
+        background-color: var(--light-bg);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        margin-bottom: 0;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #map {
+        height: 100%;
+        width: 100%;
+        flex-grow: 1;
+        min-height: 750px;
+      }
+
+      .itinerary-panel {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 340px;
+        max-height: 700px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.9) 100%);
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        z-index: 100;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+
+      .itinerary-header {
+        background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: white;
+        padding: 15px 20px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        border-radius: 12px 12px 0 0;
+        margin: 0;
+        position: sticky;
+        top: 0;
+        z-index: 101;
+      }
+
+      .itinerary-content {
+        max-height: calc(700px - 50px);
+        overflow-y: auto;
+        padding: 0;
+      }
+
+      .weather-panel {
+        background: linear-gradient(to right, rgba(77, 171, 247, 0.15), rgba(81, 207, 102, 0.1));
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+      }
+
+      .weather-panel h5 {
+        color: var(--accent-color);
+        font-weight: 700;
+        margin-bottom: 12px;
+        font-size: 1.1rem;
+      }
+
+      .weather-panel i.bx-cloud,
+      .weather-panel i.bx-sun {
+        color: var(--primary-color);
+      }
+
+      .weather-panel h6 {
+        font-weight: 700;
+        color: var(--title-color);
+      }
+
+      .weather-panel p {
+        color: #555;
+        font-weight: 500;
+      }
+
+      .day-title {
+        background: linear-gradient(90deg, var(--secondary-color) 0%, #a57aff 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 8px 8px 0 0;
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border-bottom: 2px solid var(--light-bg);
+      }
+
+      .spot {
+        padding: 15px;
+        border-bottom: 1px solid #e8f5e9;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .spot:hover,
+      .spot.active {
+        background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-blue) 100%);
+        border-left: 4px solid var(--primary-color);
+      }
+
+      /* 改进选中效果 */
+      .spot.active {
+        background: linear-gradient(135deg, rgba(255, 107, 149, 0.15) 0%, rgba(112, 166, 255, 0.25) 100%);
+        border-left: 4px solid var(--primary-color);
+        transform: translateX(4px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      /* 选中标记 */
+      .spot.active::before {
+        content: '';
+        position: absolute;
+        left: -4px;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+      }
+
+      .spot-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .spot-time {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-right: 10px;
+      }
+
+      .spot-name {
+        font-weight: 700;
+        margin: 0;
+        flex-grow: 1;
+        color: var(--title-color);
+      }
+
+      .spot-desc {
+        color: #444;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .spot-meta {
+        display: flex;
+        gap: 15px;
+        font-size: 0.85rem;
+        color: #718096;
+      }
+
+      .spot-meta-item {
+        display: flex;
+        align-items: center;
+      }
+
+      .spot-meta-item i {
+        margin-right: 4px;
+        color: var(--accent-color);
+      }
+
+      .controls {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        display: flex;
+        gap: 15px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 12px 20px;
+        border-radius: 50px;
+        backdrop-filter: blur(10px);
+      }
+
+      .control-btn {
+        background: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin: 0 10px;
+      }
+
+      .control-btn:hover {
+        background: linear-gradient(135deg, #4dabf7, #51cf66);
+        transform: scale(1.1);
+      }
+
+      .spot-detail {
+        display: none;
+      }
+
+      /* 节点标记的颜色样式 */
+      .marker-spot-0 {
+        background-color: #f44336;
+      }
+      .marker-spot-1 {
+        background-color: #e91e63;
+      }
+      .marker-spot-2 {
+        background-color: #9c27b0;
+      }
+      .marker-spot-3 {
+        background-color: #673ab7;
+      }
+      .marker-spot-4 {
+        background-color: #3f51b5;
+      }
+      .marker-spot-5 {
+        background-color: #2196f3;
+      }
+      .marker-spot-6 {
+        background-color: #03a9f4;
+      }
+      .marker-spot-7 {
+        background-color: #00bcd4;
+      }
+      .marker-spot-8 {
+        background-color: #009688;
+      }
+      .marker-spot-9 {
+        background-color: #4caf50;
+      }
+
+      @media (max-width: 992px) {
+        #map {
+          height: 500px;
+        }
+
+        .itinerary-panel {
+          position: relative;
+          top: auto;
+          right: auto;
+          width: 100%;
+          max-height: none;
+          margin-top: 1rem;
+        }
+
+        .spot-detail {
+          left: 50%;
+          transform: translateX(-50%) translateY(20px);
+          width: 90%;
+        }
+
+        .spot-detail.active {
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      /* 修改标记点样式 */
+      .custom-marker {
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .custom-marker div {
+        padding: 6px 10px; /* 缩小padding */
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        color: #ffffff; /* 更醒目的字体颜色 */
+        font-weight: 700; /* 加粗 */
+        font-size: 0.9rem; /* 缩小字体 */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 添加文字阴影增加可读性 */
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .custom-marker.spot-0 div {
+        background: linear-gradient(135deg, #ff6b6b, #ffe66d);
+      }
+      .custom-marker.spot-1 div {
+        background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+      }
+      .custom-marker.spot-2 div {
+        background: linear-gradient(135deg, #96e6a1, #d4fc79);
+      }
+      .custom-marker.spot-3 div {
+        background: linear-gradient(135deg, #fda7df, #d980fa);
+      }
+      .custom-marker.spot-4 div {
+        background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+      }
+      .custom-marker.spot-5 div {
+        background: linear-gradient(135deg, #ff6b6b, #ffe66d);
+      }
+      .custom-marker.spot-6 div {
+        background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+      }
+      .custom-marker.spot-7 div {
+        background: linear-gradient(135deg, #96e6a1, #d4fc79);
+      }
+      .custom-marker.spot-8 div {
+        background: linear-gradient(135deg, #fda7df, #d980fa);
+      }
+      .custom-marker.spot-9 div {
+        background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+      }
+
+      /* 选中的标记放大效果 */
+      .custom-marker.active {
+        z-index: 200;
+      }
+
+      .custom-marker.active div {
+        transform: scale(1.15);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 添加序号样式 */
+      .marker-number {
+        background: rgba(255, 255, 255, 0.3);
+        width: 22px; /* 稍微缩小 */
+        height: 22px; /* 稍微缩小 */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 6px; /* 缩小间距 */
+        font-weight: bold;
+      }
+
+      /* 更新日期和时间样式 */
+      .spot-time {
+        background-color: var(--primary-color);
+      }
+
+      /* 添加进度条样式 */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        z-index: 1001;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      /* 添加脉冲动画关键帧 */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header text-center">
+      <div class="container header-content">
+        <h1 class="title-chinese">北京故地重游</h1>
+        <p class="subtitle">三天精彩行程 | 2024年5月30日 - 6月1日</p>
+      </div>
+    </div>
+
+    <div class="map-wrapper">
+      <div id="map"></div>
+
+      <div class="itinerary-panel">
+        <div class="itinerary-header">
+          <h4>行程路线规划</h4>
+        </div>
+        <div class="itinerary-content">
+          <div class="weather-panel">
+            <h5><i class="bx bx-cloud"></i> 天气预报</h5>
+            <div id="weather-info" class="mt-2">
+              <div class="d-flex align-items-center">
+                <i class="bx bx-sun fs-2 me-3"></i>
+                <div>
+                  <h6 class="mb-1">北京</h6>
+                  <p class="mb-0">晴朗 25°C</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 1 -->
+          <div class="day-section mb-3">
+            <h4 class="day-title">Day 1 - 5月30日</h4>
+            <div class="spot" data-id="spot1" data-day="1">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+            <div class="spot" data-id="spot2" data-day="1">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+            <div class="spot" data-id="spot3" data-day="1">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 2 -->
+          <div class="day-section mb-3">
+            <h4 class="day-title">Day 2 - 5月31日</h4>
+            <div class="spot" data-id="spot4" data-day="2">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+            <div class="spot" data-id="spot5" data-day="2">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+            <div class="spot" data-id="spot6" data-day="2">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 3 -->
+          <div class="day-section">
+            <h4 class="day-title">Day 3 - 6月1日</h4>
+            <div class="spot" data-id="spot7" data-day="3">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+            <div class="spot" data-id="spot8" data-day="3">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+            <div class="spot" data-id="spot9" data-day="3">
+              <div class="spot-header">
+                <span class="spot-time"></span>
+                <h5 class="spot-name"></h5>
+              </div>
+              <p class="spot-desc"></p>
+              <div class="spot-meta">
+                <div class="spot-meta-item"><i class="bx bx-time"></i></div>
+                <div class="spot-meta-item"><i class="bx bx-money"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn" id="playBtn" title="播放路线动画">
+          <i class="bx bx-play"></i>
+        </button>
+        <button class="control-btn" id="overviewBtn" title="显示完整路线">
+          <i class="bx bx-map-alt"></i>
+        </button>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=3cdb60742465c1e86b6133e6a2a26ff5"></script>
+    <script>
+      // 景点配置数据
+      const SPOTS_CONFIG = [
+        // 第一天
+        {
+          id: 'spot1',
+          location: [116.398019, 39.87272], // 精确核对的永定门城楼坐标
+          time: '09:00',
+          name: '永定门城楼',
+          description: '明清时期重要城门，现为北京古代建筑博物馆',
+          fee: '20元/人',
+          duration: '1.5小时',
+          day: 1,
+          icon: '🏯' // 添加景点图标
+        },
+        {
+          id: 'spot2',
+          location: [116.380696, 39.874088], // 用户提供的陶然亭公园精确坐标
+          time: '11:00',
+          name: '陶然亭公园',
+          description: '清代名园，以亭得名，湖光山色，环境优美',
+          fee: '10元/人',
+          duration: '1.5小时',
+          day: 1,
+          icon: '🏞️' // 添加景点图标
+        },
+        {
+          id: 'spot3',
+          location: [116.407526, 39.882218], // 天坛公园坐标
+          time: '14:00',
+          name: '天坛公园',
+          description: '世界文化遗产，明清两代帝王祭天场所',
+          fee: '35元/人',
+          duration: '3小时',
+          day: 1,
+          icon: '⛩️' // 添加景点图标
+        },
+        // 第二天
+        {
+          id: 'spot4',
+          location: [116.401148, 39.896135], // 用户提供的前门大街精确坐标
+          time: '09:00',
+          name: '前门大街',
+          description: '老北京商业街，传统建筑群',
+          fee: '免费',
+          duration: '2小时',
+          day: 2,
+          icon: '🏮' // 添加景点图标
+        },
+        {
+          id: 'spot5',
+          location: [116.392465, 39.905219], // 用户提供的人民大会堂精确坐标
+          time: '12:00',
+          name: '人民大会堂',
+          description: '中国最高国家权力机关办公地，政治中心',
+          fee: '30元/人',
+          duration: '2小时',
+          day: 2,
+          icon: '🏛️' // 添加景点图标
+        },
+        {
+          id: 'spot6',
+          location: [116.397452, 39.906073], // 天安门广场坐标
+          time: '15:00',
+          name: '天安门广场',
+          description: '世界最大城市中心广场',
+          fee: '免费',
+          duration: '2小时',
+          day: 2,
+          icon: '🏛️' // 添加景点图标
+        },
+        // 第三天
+        {
+          id: 'spot7',
+          location: [116.397026, 39.918058], // 故宫博物院坐标
+          time: '09:00',
+          name: '故宫博物院',
+          description: '世界最大的宫殿建筑群，中国明清两代的皇家宫殿',
+          fee: '60元/人',
+          duration: '4小时',
+          day: 3,
+          icon: '🏯' // 添加景点图标
+        },
+        {
+          id: 'spot8',
+          location: [116.386795, 39.926984], // 精确核对的北海公园坐标
+          time: '14:00',
+          name: '北海公园',
+          description: '皇家园林，千年历史文化遗址',
+          fee: '20元/人',
+          duration: '2小时',
+          day: 3,
+          icon: '🏞️' // 添加景点图标
+        },
+        {
+          id: 'spot9',
+          location: [116.403366, 39.936812], // 南锣鼓巷坐标
+          time: '17:00',
+          name: '南锣鼓巷',
+          description: '老北京胡同文化，传统小吃与特色商铺',
+          fee: '免费',
+          duration: '2小时',
+          day: 3,
+          icon: '🏮' // 添加景点图标
+        }
+      ];
+
+      // 全局变量
+      let map,
+        markers = [],
+        polyline,
+        animatedPolyline,
+        currentIndex = -1;
+      let timer = null,
+        animationPaused = true;
+      let spots = [];
+      let drawTimer = null;
+      let completedSegments = [];
+
+      // 初始化地图
+      function initMap() {
+        map = new AMap.Map('map', {
+          zoom: 11,
+          center: [116.4, 39.9],
+          viewMode: '2D', // 使用2D模式
+          mapStyle: 'amap://styles/fresh',
+          animateEnable: true
+        });
+
+        // 添加地图控件
+        map.plugin(['AMap.Scale'], function () {
+          map.addControl(new AMap.Scale());
+        });
+
+        // 使用配置数据初始化景点
+        initSpots();
+
+        // 创建标记和路线
+        createMarkersAndRoute();
+
+        // 绑定事件
+        bindEvents();
+      }
+
+      // 从配置数据初始化景点
+      function initSpots() {
+        // 清空现有数据
+        spots = [];
+
+        // 获取所有景点DOM元素
+        const spotElements = document.querySelectorAll('.spot');
+
+        // 从配置数据创建景点对象
+        SPOTS_CONFIG.forEach((config, index) => {
+          const spotData = {
+            id: config.id,
+            location: config.location,
+            time: config.time,
+            name: config.name,
+            description: config.description,
+            fee: config.fee,
+            duration: config.duration,
+            element: spotElements[index],
+            day: config.day,
+            icon: config.icon || '📍' // 使用配置的图标或默认图标
+          };
+          spots.push(spotData);
+
+          // 同时更新DOM元素的数据属性
+          if (spotElements[index]) {
+            spotElements[index].dataset.location = config.location.join(',');
+            spotElements[index].dataset.time = config.time;
+            spotElements[index].dataset.name = config.name;
+            spotElements[index].dataset.description = config.description;
+            spotElements[index].dataset.fee = config.fee;
+            spotElements[index].dataset.duration = config.duration;
+
+            // 更新DOM元素内部的显示内容
+            const timeElement = spotElements[index].querySelector('.spot-time');
+            const nameElement = spotElements[index].querySelector('.spot-name');
+            const descElement = spotElements[index].querySelector('.spot-desc');
+            const durationElement = spotElements[index].querySelector('.spot-meta-item:first-child');
+            const feeElement = spotElements[index].querySelector('.spot-meta-item:last-child');
+
+            if (timeElement) timeElement.textContent = config.time;
+            if (nameElement) nameElement.textContent = config.name;
+            if (descElement) descElement.textContent = config.description;
+            if (durationElement) durationElement.innerHTML = `<i class="bx bx-time"></i> ${config.duration}`;
+            if (feeElement) feeElement.innerHTML = `<i class="bx bx-money"></i> ${config.fee}`;
+          }
+        });
+      }
+
+      // 创建所有标记点和路线
+      function createMarkersAndRoute() {
+        // 清空现有标记
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
+
+        if (polyline) {
+          polyline.setMap(null);
+          polyline = null;
+        }
+
+        // 创建标记点
+        spots.forEach((spot, index) => {
+          // 为每个节点创建自定义标记内容
+          const markerContent = document.createElement('div');
+          markerContent.className = `custom-marker spot-${index}`;
+          markerContent.innerHTML = `
+            <div>
+              <span class="marker-number">${index + 1}</span>
+              <span>${spot.icon || ''} ${spot.name}</span>
+            </div>
+          `;
+
+          const marker = new AMap.Marker({
+            position: spot.location,
+            map: map,
+            content: markerContent,
+            offset: new AMap.Pixel(-10, -20),
+            zIndex: 100
+          });
+
+          // 点击标记时高亮显示
+          marker.on('click', () => {
+            currentIndex = index;
+            highlightSpot(index);
+          });
+
+          markers.push(marker);
+        });
+
+        // 创建虚线路径（背景路线）
+        const path = spots.map(spot => spot.location);
+        polyline = new AMap.Polyline({
+          path: path,
+          strokeColor: '#cccccc',
+          strokeWeight: 4,
+          strokeOpacity: 0.6,
+          strokeStyle: 'dashed',
+          strokeDasharray: [5, 5],
+          zIndex: 50
+        });
+        polyline.setMap(map);
+
+        // 调整地图视野以包含所有标记点
+        map.setFitView(markers);
+      }
+
+      // 添加中国风水墨画效果水印
+      function addWatermark() {
+        // 创建水印层
+        const watermark = document.createElement('div');
+        watermark.style.cssText = `
+          position: absolute;
+          bottom: 30px;
+          left: 30px;
+          opacity: 0.1;
+          pointer-events: none;
+          z-index: 50;
+        `;
+        watermark.innerHTML = `
+          <svg width="200" height="150" viewBox="0 0 200 150">
+            <path d="M20,80 Q50,20 80,80 T140,80" stroke="#000" stroke-width="8" fill="none" />
+            <path d="M40,100 Q70,60 100,100 T160,100" stroke="#000" stroke-width="8" fill="none" />
+          </svg>
+        `;
+        document.querySelector('.map-wrapper').appendChild(watermark);
+      }
+
+      // 显示景点详情
+      function showSpotDetail(index) {
+        const spot = spots[index];
+        const detailEl = document.querySelector('.spot-detail');
+
+        // 更新详情内容
+        detailEl.querySelector('.detail-name').textContent = spot.name;
+        detailEl.querySelector('.detail-time').textContent = spot.time;
+        detailEl.querySelector('.detail-desc').textContent = spot.description;
+        detailEl.querySelector('.detail-duration').textContent = `建议游览：${spot.duration}`;
+        detailEl.querySelector('.detail-fee').textContent = `门票：${spot.fee}`;
+
+        // 显示详情面板
+        detailEl.classList.add('active');
+
+        // 地图聚焦到该点
+        map.setCenter(spot.location);
+        map.setZoom(14);
+      }
+
+      // 修改平滑设置地图视图函数
+      function smoothSetMapView(viewPoints, padding = [60, 60, 60, 60]) {
+        // 计算边界
+        const bounds = new AMap.Bounds();
+        viewPoints.forEach(point => {
+          bounds.extend(point.getPosition());
+        });
+
+        // 获取中心点
+        const targetCenter = bounds.getCenter();
+
+        // 使用平滑移动
+        map.panTo(targetCenter);
+
+        // 如果需要调整缩放级别，使用平滑缩放
+        const targetZoom = Math.min(map.getFitZoomByBounds(bounds, padding), 14);
+        if (map.getZoom() !== targetZoom) {
+          map.setZoom(targetZoom);
+        }
+      }
+
+      // 修改播放下一段路线的函数
+      function playNextSegment() {
+        if (animationPaused) return;
+
+        if (currentIndex < spots.length - 1) {
+          const nextIndex = currentIndex + 1;
+
+          // 获取当前点和下一个点的位置
+          const currentLoc = currentIndex > -1 ? spots[currentIndex].location : spots[0].location;
+          const nextLoc = spots[nextIndex].location;
+
+          // 计算两点中心点
+          const centerLat = (currentLoc[1] + nextLoc[1]) / 2;
+          const centerLng = (currentLoc[0] + nextLoc[0]) / 2;
+
+          // 计算两点之间的距离（公里数）
+          const distance = Math.sqrt(Math.pow(currentLoc[0] - nextLoc[0], 2) + Math.pow(currentLoc[1] - nextLoc[1], 2)) * 111; // 大致转换为公里
+
+          // 根据距离调整缩放级别，距离越大缩放级别越小
+          let zoom = 14; // 默认缩放级别
+
+          if (distance < 0.5)
+            zoom = 15; // 500米以内
+          else if (distance < 2)
+            zoom = 14; // 2公里以内
+          else if (distance < 5)
+            zoom = 13; // 5公里以内
+          else if (distance < 10)
+            zoom = 12; // 10公里以内
+          else zoom = 11; // 更远距离
+
+          // 平滑设置地图视野，确保两点都在视野内
+          map.setZoomAndCenter(zoom, [centerLng, centerLat], false, 600);
+
+          // 高亮当前和下一个点
+          highlightSpot(nextIndex);
+
+          // 绘制路线
+          drawAnimatedLine(currentIndex > -1 ? currentIndex : 0, nextIndex, () => {
+            currentIndex = nextIndex;
+
+            // 立即继续播放下一段
+            if (!animationPaused) {
+              playNextSegment();
+            }
+          });
+        } else {
+          pauseRouteAnimation();
+          // 播放完毕，显示全景图
+          showFullRouteMap();
+        }
+      }
+
+      // 绘制动画路线
+      function drawAnimatedLine(startIndex, endIndex, callback) {
+        const startPoint = spots[startIndex].location;
+        const endPoint = spots[endIndex].location;
+
+        // 获取路线颜色
+        const pathColor = getColorForIndex(startIndex);
+
+        // 生成路径点
+        const pathPoints = [];
+        const pointCount = 100; // 增加点的数量使路径更平滑
+
+        // 创建初始路线
+        let polyline = new AMap.Polyline({
+          path: [startPoint],
+          strokeColor: pathColor,
+          strokeWeight: 6,
+          strokeOpacity: 0.8,
+          lineJoin: 'round',
+          lineCap: 'round',
+          zIndex: 90,
+          showDir: true
+        });
+        polyline.setMap(map);
+
+        // 计算所有点的位置
+        for (let i = 0; i <= pointCount; i++) {
+          const ratio = i / pointCount;
+          const lng = startPoint[0] + (endPoint[0] - startPoint[0]) * ratio;
+          const lat = startPoint[1] + (endPoint[1] - startPoint[1]) * ratio;
+          pathPoints.push([lng, lat]);
+        }
+
+        // 创建绘制动画
+        let currentPoint = 0;
+        const animationStep = 3; // 每次增加的点数，从2增加到3，加快绘制速度
+        const drawInterval = 40; // 动画间隔时间，从50减少到40，加快绘制速度
+
+        const drawTimer = setInterval(() => {
+          currentPoint += animationStep;
+
+          if (currentPoint >= pathPoints.length) {
+            // 动画完成
+            clearInterval(drawTimer);
+
+            // 保存路线
+            if (!completedSegments.includes(polyline)) {
+              completedSegments.push(polyline);
+            }
+
+            if (callback) {
+              setTimeout(callback, 400); // 从500减少到400，加快转场速度
+            }
+            return;
+          }
+
+          // 更新路径
+          polyline.setPath(pathPoints.slice(0, currentPoint + 1));
+        }, drawInterval);
+
+        return polyline;
+      }
+
+      // 获取颜色函数
+      function getColorForIndex(index) {
+        const colors = [
+          '#ff6b95', // 粉红
+          '#70a6ff', // 蓝色
+          '#ffa582', // 橙色
+          '#fd7e14', // 深橙
+          '#f06595', // 深粉
+          '#ff6b95', // 粉红
+          '#70a6ff', // 蓝色
+          '#ffa582', // 橙色
+          '#fd7e14', // 深橙
+          '#f06595' // 深粉
+        ];
+        return colors[index % colors.length];
+      }
+
+      // 修改高亮显示函数
+      function highlightSpot(index) {
+        // 高亮当前景点卡片
+        spots.forEach((spot, i) => {
+          if (i === index) {
+            spot.element.classList.add('active');
+            // 平滑滚动到选中的景点卡片
+            spot.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            spot.element.classList.remove('active');
+          }
+        });
+
+        // 高亮对应的标记
+        markers.forEach((marker, i) => {
+          const markerEl = marker.getContent();
+          if (i === index) {
+            markerEl.classList.add('active');
+            // 为选中的标记添加脉冲动画效果
+            markerEl.style.animation = 'pulse 1.5s infinite';
+          } else {
+            markerEl.classList.remove('active');
+            markerEl.style.animation = '';
+          }
+        });
+      }
+
+      // 播放路线动画
+      function playRouteAnimation() {
+        // 总是从头开始播放
+        resetRouteAnimation(true);
+
+        animationPaused = false;
+        const playBtn = document.getElementById('playBtn');
+        playBtn.innerHTML = '<i class="bx bx-pause"></i>';
+        playBtn.onclick = pauseRouteAnimation;
+
+        // 立即开始播放，无需延时
+        playNextSegment();
+      }
+
+      // 暂停路线动画
+      function pauseRouteAnimation() {
+        if (animationPaused) return;
+
+        animationPaused = true;
+        clearInterval(timer);
+        clearInterval(drawTimer);
+
+        const playBtn = document.getElementById('playBtn');
+        playBtn.innerHTML = '<i class="bx bx-play"></i>';
+        playBtn.onclick = playRouteAnimation;
+      }
+
+      // 修改重置动画函数
+      function resetRouteAnimation(keepPaused = false) {
+        pauseRouteAnimation();
+
+        // 清除所有已完成的线段
+        completedSegments.forEach(segment => {
+          if (segment) segment.setMap(null);
+        });
+        completedSegments = [];
+
+        currentIndex = -1;
+
+        // 重置所有标记和景点高亮
+        markers.forEach(marker => {
+          const markerEl = marker.getContent();
+          markerEl.classList.remove('active');
+        });
+
+        spots.forEach(spot => {
+          spot.element.classList.remove('active');
+        });
+
+        // 平滑移动到起点
+        if (spots.length > 0) {
+          map.panTo(spots[0].location);
+        }
+
+        if (!keepPaused) {
+          const playBtn = document.getElementById('playBtn');
+          playBtn.innerHTML = '<i class="bx bx-play"></i>';
+          playBtn.onclick = playRouteAnimation;
+        }
+      }
+
+      // 展示完整路线地图
+      function showFullRouteMap() {
+        // 设置视图包含所有标记点
+        map.setFitView(markers, false, [80, 80, 80, 80]);
+      }
+
+      // 绑定事件
+      function bindEvents() {
+        // 播放按钮 - 总是从头开始播放
+        const playBtn = document.getElementById('playBtn');
+        playBtn.onclick = playRouteAnimation;
+
+        // 概览按钮 - 展示完整路线
+        document.getElementById('overviewBtn').addEventListener('click', showFullRouteMap);
+
+        // 点击景点卡片
+        spots.forEach((spot, index) => {
+          spot.element.addEventListener('click', () => {
+            // 暂停当前动画
+            pauseRouteAnimation();
+
+            // 清除已有线条
+            if (animatedPolyline) {
+              animatedPolyline.setMap(null);
+              animatedPolyline = null;
+            }
+
+            // 设置当前索引
+            currentIndex = index;
+
+            // 高亮显示
+            highlightSpot(index);
+          });
+        });
+      }
+
+      // 页面加载完成后初始化
+      window.onload = function () {
+        initMap();
+        // 更新概览按钮的图标
+        document.getElementById('overviewBtn').innerHTML = '<i class="bx bx-map-alt"></i>';
+      };
+    </script>
+  </body>
+</html>
